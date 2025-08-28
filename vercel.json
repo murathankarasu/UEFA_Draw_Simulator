@@ -9,12 +9,7 @@
     { "src": "general.html", "use": "@vercel/static" },
     { "src": "assets/**/*", "use": "@vercel/static" }
   ],
-  "routes": [
-    { "src": "/", "dest": "/index.html" },
-    { "src": "/select", "dest": "/select.html" },
-    { "src": "/result", "dest": "/result.html" },
-    { "src": "/general", "dest": "/general.html" }
-  ],
+  
   "headers": [
     {
       "source": "/assets/(.*)",
