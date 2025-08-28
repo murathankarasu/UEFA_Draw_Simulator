@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "name": "cl-draw",
+  "public": true,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "select.html", "use": "@vercel/static" },
+    { "src": "result.html", "use": "@vercel/static" },
+    { "src": "general.html", "use": "@vercel/static" },
+    { "src": "assets/**/*", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/select", "dest": "/select.html" },
+    { "src": "/result", "dest": "/result.html" },
+    { "src": "/general", "dest": "/general.html" }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}
+
+

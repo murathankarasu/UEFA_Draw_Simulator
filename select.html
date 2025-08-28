@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Takım Seç – UEFA Şampiyonlar Ligi Kura Simülasyonu</title>
+    <link rel="icon" href="assets/newlogo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .team-grid { display:grid; gap:12px; grid-template-columns: repeat(2, minmax(140px, 1fr)); }
+      @media (min-width: 720px) { .team-grid { grid-template-columns: repeat(4, minmax(140px, 1fr)); } }
+      @media (min-width: 1080px) { .team-grid { grid-template-columns: repeat(6, minmax(140px, 1fr)); } }
+      .team-card { cursor: pointer; padding:12px; border-radius:12px; background: linear-gradient(160deg, var(--panel), var(--panel-2)); border:1px solid rgba(255,255,255,.08); display:flex; flex-direction:column; align-items:center; gap:8px; box-shadow: var(--shadow); transition: transform .12s ease, border-color .2s ease; }
+      .team-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.25); }
+      .team-card img { width:48px; height:48px; border-radius:6px; object-fit: contain; background: rgba(255,255,255,.04); }
+      .team-card .name { font-weight:700; text-align:center; }
+      .overlay { position: fixed; inset: 0; background: rgba(11,16,32,.8); display:none; align-items:center; justify-content:center; z-index: 50; }
+      .overlay.show { display:flex; }
+      .overlay-box { display:flex; flex-direction:column; align-items:center; gap:12px; padding:20px; border-radius:14px; background: linear-gradient(160deg, var(--panel), var(--panel-2)); border:1px solid rgba(255,255,255,.12); box-shadow: var(--shadow); }
+      .overlay-box img { width:72px; height:72px; border-radius:10px; }
+      .spinner { width: 28px; height: 28px; border: 3px solid rgba(255,255,255,.2); border-top-color: #8bd1ff; border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg) } }
+      .info-rotator { color: var(--muted); font-size: 13px; min-height: 18px; }
+      .fade { animation: fade 500ms ease both; }
+      @keyframes fade { from { opacity: 0; transform: translateY(4px) } to { opacity: 1; transform: none } }
+    </style>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="logo">
+        <img src="assets/newlogo.png" alt="CL" class="brand" />
+        <span>Takım Seç</span>
+      </div>
+      <div class="controls">
+        <a href="index.html" class="btn ghost">Geri</a>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section aria-label="Takım Seçimi">
+        <h2>Takımını Seç</h2>
+        <div id="team-grid" class="team-grid"></div>
+      </section>
+    </main>
+
+    <div id="overlay" class="overlay" aria-hidden="true">
+      <div class="overlay-box">
+        <img id="overlay-logo" src="assets/newlogo.png" alt="loading" />
+        <div>kura oluşturuluyor…</div>
+        <div class="spinner"></div>
+        <div id="overlay-info" class="info-rotator"></div>
+      </div>
+    </div>
+
+    <script src="select.js" defer></script>
+    <script>
+      // Load env to ensure Gemini works after redirect as well
+      fetch('env.json').then(r=>r.json()).then(env=>{ if (env.GEMINI_API_KEY) localStorage.setItem('gemini_api_key', env.GEMINI_API_KEY); }).catch(()=>{});
+    </script>
+  </body>
+  </html>
+
+

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Genel Fikstür</title>
+    <link rel="icon" href="assets/newlogo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="logo">
+        <img src="assets/newlogo.png" alt="CL" class="brand" />
+        <span>Genel Fikstür</span>
+      </div>
+      <div class="controls">
+        <a href="result.html" class="btn ghost">Geri</a>
+        <div id="week-nav" class="week-nav">
+          <button id="prev-week" class="btn ghost">◀</button>
+          <span id="week-label"></span>
+          <button id="next-week" class="btn ghost">▶</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="league" aria-label="Genel Fikstür">
+        <div id="general-content" class="league-grid"></div>
+      </section>
+    </main>
+
+    <script src="general.js" defer></script>
+    <script>
+      fetch('env.json').then(r=>r.json()).then(env=>{ if (env.GEMINI_API_KEY) localStorage.setItem('gemini_api_key', env.GEMINI_API_KEY); }).catch(()=>{});
+    </script>
+  </body>
+  </html>
+
+
